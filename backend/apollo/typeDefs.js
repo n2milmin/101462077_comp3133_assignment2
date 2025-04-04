@@ -1,8 +1,9 @@
 const { gql } = require('apollo-server');
 
-exports.typeDefs = gql `
+exports.typeDefs = gql`
     scalar Date
 
+    # Employee type
     type Employee {
         id: ID!
         first_name: String!
@@ -18,15 +19,17 @@ exports.typeDefs = gql `
         updated_at: Date
     }
 
+    # User type
     type User {
         id: ID!
         username: String!
         email: String!
         password: String!
         created_at: Date!
-        updated_at: Date! 
+        updated_at: Date!
     }
 
+    # Query type for fetching data
     type Query {
         login(username: String!, password: String!): User
         getAllEmp: [Employee]
@@ -34,10 +37,11 @@ exports.typeDefs = gql `
         searchEmpByD(designation: String, department: String): [Employee]
     }
 
+    # Mutation type for creating and updating data
     type Mutation {
         signup(
-            username: String!, 
-            email: String!, 
+            username: String!,
+            email: String!,
             password: String!
         ): User
         addEmp(
@@ -64,7 +68,7 @@ exports.typeDefs = gql `
             date_of_joining: Date,
             department: String,
             employee_photo: String
-            ): Employee
+        ): Employee
         deleteEmpByID(id: ID!): String
     }
-`
+`;

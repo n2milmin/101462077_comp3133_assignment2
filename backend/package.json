@@ -18,14 +18,15 @@
     "graphql",
     "mongodb",
     "express",
-    "API"
+    "API",
+    "GraphQL"
   ],
   "author": "Nicole Milmine",
   "license": "ISC",
   "homepage": "git+https://github.com/n2milmin/COMP3133_FullStack_II.git",
   "dependencies": {
     "apollo-server": "^3.13.0",
-    "apollo-server-express": "^2.19.2",
+    "apollo-server-express": "^3.13.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
