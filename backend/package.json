@@ -1,0 +1,40 @@
+{
+  "name": "n2milmin_comp3133_101462077_assignment1",
+  "version": "1.0.0",
+  "description": "Assignment 1 - GraphQL API",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n2milmin/COMP3133_FullStack_II.git"
+  },
+  "keywords": [
+    "mongoose",
+    "Apollo",
+    "graphql",
+    "mongodb",
+    "express",
+    "API"
+  ],
+  "author": "Nicole Milmine",
+  "license": "ISC",
+  "homepage": "git+https://github.com/n2milmin/COMP3133_FullStack_II.git",
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "apollo-server-express": "^2.19.2",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "graphql": "^15.10.1",
+    "mongoose": "^8.10.0",
+    "node": "^22.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
