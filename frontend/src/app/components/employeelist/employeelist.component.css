@@ -21,6 +21,7 @@
     table {
       width: 100%;
       overflow-x: auto;
+      margin-top: 20px;
     }
   
     th.mat-header-cell {
