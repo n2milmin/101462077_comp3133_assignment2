@@ -40,11 +40,11 @@ export class LoginComponent {
 
     const { username, password } = this.loginForm.value;
 
-    this.apollo.query({
+    this.apollo.watchQuery({
       query: LOGIN_QUERY,
       variables: { username, password}
     })
-    .subscribe({
+    .valueChanges.subscribe({
       next: (result: any) => {
         const token = result?.data?.login?.token;
         if(token){

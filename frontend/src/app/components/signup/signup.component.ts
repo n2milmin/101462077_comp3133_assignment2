@@ -15,7 +15,7 @@ const SIGNUP_MUTATION = gql`
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
