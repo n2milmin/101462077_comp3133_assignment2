@@ -6,9 +6,9 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
-const LOGIN_MUTATION = gql`
-  mutatuion Login($email: String, $password: String!) {
-    login(email: $email, password: $password) {
+const LOGIN_QUERY = gql`
+  query Login($username: String, $password: String!) {
+    login(username: $username, password: $password) {
       token
 }}`
 
@@ -28,7 +28,7 @@ export class LoginComponent {
   error: string | null = null;
 
   loginForm = this.form.group({
-    email: ['', [Validators.required, Validators.email]],
+    username: ['', Validators.required],
     password: ['', Validators.required]
   });
 
@@ -38,11 +38,11 @@ export class LoginComponent {
     this.loading = true;
     this.error = null;
 
-    const { email, password } = this.loginForm.value;
+    const { username, password } = this.loginForm.value;
 
-    this.apollo.mutate({
-      mutation: LOGIN_MUTATION,
-      variables: { email, password}
+    this.apollo.query({
+      query: LOGIN_QUERY,
+      variables: { username, password}
     })
     .subscribe({
       next: (result: any) => {
@@ -60,7 +60,7 @@ export class LoginComponent {
         console.log(err);
       },
       complete: () => {
-        this.loading = false;
+        this.loading = false
       }
     })
   }
