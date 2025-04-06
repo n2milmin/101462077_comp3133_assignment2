@@ -5,15 +5,20 @@ import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
-
-const apolloOptions: ApolloClientOptions<any> = {
-  uri: 'http://localhost:4000/graphql',
-  cache: new InMemoryCache(),
-};
+import { HttpLink } from 'apollo-angular/http';
+import { inject } from '@angular/core';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideApollo(() => apolloOptions), 
+    provideApollo(() => {
+      const httpLink = inject(HttpLink); 
+      return {
+        link: httpLink.create({
+          uri: 'http://localhost:4000/graphql', 
+        }),
+        cache: new InMemoryCache(), 
+      };
+    }),
     provideHttpClient(),
     provideRouter(routes),
   ],

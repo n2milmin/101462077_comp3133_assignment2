@@ -23,7 +23,7 @@ const GET_EMP_QUERY = gql`
 }}`
 
 const DELETE_EMP_MUTATION = gql`
-  mutation DeleteEmpByID(id: ID!){
+  mutation DeleteEmpByID($id: ID!){
     deleteEmpById(id: $id){
       id
 }}`

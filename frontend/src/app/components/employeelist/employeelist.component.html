@@ -1,6 +1,6 @@
 <div class="employee-list-container">
     <h2>Employee List</h2>
-    <button mat-raised-button color="primary" (click)="navigateToAddEmployee()">Add Employee</button>
+    <button mat-raised-button color="primary" (click)="addEmployee()">Add Employee</button>
 
     <div *ngIf="loading">Loading...</div>
     <div *ngIf="error" class="error">{{ error }}</div>
@@ -71,8 +71,8 @@
         </td>
       </ng-container>
   
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayed"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayed;"></tr>
     </table>
   </div>
   

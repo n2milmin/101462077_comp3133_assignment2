@@ -5,11 +5,7 @@ import { HttpLink } from 'apollo-angular/http';
 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   return {
-    link: httpLink.create({ uri: 'http://localhost:4000/graphql' }), 
+    link: httpLink.create({ uri: 'http://localhost:4000/graphql' }),
     cache: new InMemoryCache(),
   };
 }
-
-export const provideGraphQL = (httpLink: HttpLink) => [
-  provideApollo(createApollo(httpLink)),
-];
