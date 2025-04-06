@@ -34,7 +34,7 @@ const DELETE_EMP_MUTATION = gql`
 @Component({
   selector: 'app-employeedetails',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatCardModule],
+  imports: [CommonModule, MatTableModule, MatCardModule, MatButtonModule],
   templateUrl: './employeedetails.component.html',
   styleUrl: './employeedetails.component.css'
 })
