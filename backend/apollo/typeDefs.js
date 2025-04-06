@@ -2,6 +2,9 @@ const { gql } = require('apollo-server');
 
 exports.typeDefs = gql`
     scalar Date
+    type AuthPayload {
+        token: String!
+    }
 
     # Employee type
     type Employee {
@@ -31,7 +34,7 @@ exports.typeDefs = gql`
 
     # Query type for fetching data
     type Query {
-        login(username: String!, password: String!): User
+        login(username: String!, password: String!): AuthPayload!
         getAllEmp: [Employee]
         searchEmpById(id: ID!): Employee
         searchEmpByD(designation: String, department: String): [Employee]
@@ -43,7 +46,7 @@ exports.typeDefs = gql`
             username: String!,
             email: String!,
             password: String!
-        ): User
+        ): AuthPayload!
         addEmp(
             first_name: String!,
             last_name: String!,

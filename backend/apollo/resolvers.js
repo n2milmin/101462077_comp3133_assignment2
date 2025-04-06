@@ -2,6 +2,8 @@ const Employee = require('../models/employee');
 const User = require('../models/user');
 const { compare } = require('bcrypt');
 const { GraphQLScalarType, Kind } = require('graphql');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const dateScalar = new GraphQLScalarType({
   name: 'Date',
@@ -22,23 +24,32 @@ const dateScalar = new GraphQLScalarType({
 
 
 module.exports = {
-    Date: dateScalar,
+  Date: dateScalar,
   Query: {
-    // Login query - Added error handling for non-existing user
+    // Login query
     login: async (_, { username, password }) => {
+      // Find the user 
       const user = await User.findOne({ username: username });
-      
+    
       if (!user) {
-        throw new Error("User not found");
+        throw new Error("Invalid username/password"); 
       }
-
-      const validate = await compare(password, user.password);
-
-      if (!validate) {
+    
+      // Compare the given password 
+      const isValidPassword = await bcrypt.compare(password, user.password);
+    
+      if (!isValidPassword) {
         throw new Error("Invalid username/password");
       }
-
-      return user;
+    
+      // Generate a JWT token 
+      const token = jwt.sign(
+        { id: user._id, username: user.username, email: user.email },
+        process.env.JWT_SECRET, 
+        { expiresIn: '1h' } 
+      );
+    
+      return {token};
     },
 
     // Get all employees
@@ -62,14 +73,37 @@ module.exports = {
   Mutation: {
     // Signup mutation
     signup: async (_, { username, email, password }) => {
+      console.log("Start signup")
       if (!username || !email || !password) {
+        console.log("Fill all fields")
         throw new Error("Please fill all fields");
       }
-
-      const user = new User({ username, email, password });
+    
+      // Check if the email already exists
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        console.log("User exists")
+        throw new Error("Email already in use");
+      }
+    
+      const hashedPassword = await bcrypt.hash(password, 12);
+    
+      const user = new User({
+        username,
+        email,
+        password: hashedPassword, 
+      });
       await user.save();
-
-      return user;
+      console.log("user saved")
+    
+      // Generate a JWT token 
+      const token = jwt.sign(
+        { id: user._id, username: user.username, email: user.email },
+        process.env.JWT_SECRET, 
+        { expiresIn: '1h' } 
+      );
+    
+      return {token};
     },
 
     // Add new employee

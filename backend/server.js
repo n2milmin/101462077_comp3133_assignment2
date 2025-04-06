@@ -31,7 +31,10 @@ async function startServer() {
   // Define Express app
   const app = express();
   app.use(express.json());
-  app.use('*', cors());  // Enable Cross-Origin Requests
+  app.use(cors({
+    origin: 'http://localhost:4200', 
+    credentials: true
+  }));
 
   const server = new ApolloServer({
     typeDefs: typeDefs,  

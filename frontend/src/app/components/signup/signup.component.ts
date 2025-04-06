@@ -47,7 +47,7 @@ export class SignupComponent {
     })
     .subscribe({
       next: (result: any) => {
-        const token = result?.data?.signup?.token;
+        const token = result?.data;
         if(token){
           localStorage.setItem('token', token);
           this.router.navigate(['/employees']);

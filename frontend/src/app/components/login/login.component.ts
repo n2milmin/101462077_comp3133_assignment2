@@ -20,16 +20,15 @@ const LOGIN_QUERY = gql`
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  private form = inject(FormBuilder);
-  private apollo = inject(Apollo);
-  private router = inject(Router);
-  
+  private form = inject(FormBuilder);  
   loading = false;
   error: string | null = null;
+  
+  constructor(private apollo: Apollo, private router: Router) {}
 
   loginForm = this.form.group({
     username: ['', Validators.required],
-    password: ['', Validators.required]
+    password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
   onSubmit() {
@@ -46,7 +45,7 @@ export class LoginComponent {
     })
     .valueChanges.subscribe({
       next: (result: any) => {
-        const token = result?.data?.login?.token;
+        const token = result?.data?.login;
         if(token){
           localStorage.setItem('token', token);
           this.router.navigate(['/employees']);
