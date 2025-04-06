@@ -67,7 +67,7 @@ export class EmployeelistComponent {
   }
 
   viewDetails(id: string) {
-    this.router.navigate(['/employeeDetails', id])
+    this.router.navigate(['/employees', id])
   }
 
   updateEmployee(id: string) {

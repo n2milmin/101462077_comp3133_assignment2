@@ -11,7 +11,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'employees', component: EmployeelistComponent },
-  { path: 'employeeDetails', component: EmployeedetailsComponent },
+  { path: 'employees/:id', component: EmployeedetailsComponent },
   { path: 'employees/add', component: AddemployeeComponent },
-  { path: 'employees/update', component: UpdateemployeeComponent }
+  { path: 'employees/update/:id', component: UpdateemployeeComponent }
 ];
