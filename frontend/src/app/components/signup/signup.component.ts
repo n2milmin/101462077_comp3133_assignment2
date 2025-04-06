@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +15,7 @@ const SIGNUP_MUTATION = gql`
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule, RouterLink],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
