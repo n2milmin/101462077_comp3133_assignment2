@@ -21,11 +21,11 @@ const SIGNUP_MUTATION = gql`
 })
 export class SignupComponent {
   private form = inject(FormBuilder);
-  private apollo = inject(Apollo);
-  private router = inject(Router);
 
   loading = false;
   error: string | null = null;
+
+  constructor(private apollo: Apollo, private router: Router) {}
   
   signupForm = this.form.group({
     username: ['', Validators.required],

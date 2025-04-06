@@ -6,8 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 
 const GET_EMP_QUERY = gql`
-  query GetAllEmployees{
-    employee{
+  {
+    getAllEmp {
       id
       first_name
       last_name
@@ -36,30 +36,32 @@ const DELETE_EMP_MUTATION = gql`
   styleUrl: './employeelist.component.css'
 })
 export class EmployeelistComponent {
-  private apollo = inject(Apollo);
-  private router = inject(Router);
-
   employees: any[] = [];
-  displayed: string[] = ['id', 'first_name', 'last_name', 'gender', 'email', 'designation', 'department', 'salary']
-
-  loading = false;
+  displayed: string[] = [
+    'id',
+    'name',
+    'gender',
+    'email',
+    'designation',
+    'department',
+    'salary',
+    'actions'
+  ];
   error: string | null = null;
 
+  constructor(private apollo: Apollo, private router: Router) {}
+
   ngOnInit() {
-    this.loading = true;
     this.apollo.watchQuery({
       query: GET_EMP_QUERY
     })
     .valueChanges.subscribe({
       next: (result: any) => {
-        this.employees = result?.data?.employees || [];
+        this.employees = result?.data?.getAllEmp || [];
       },
       error: err => {
         this.error = 'Server error: could not fetch employees.';
         console.log(err)
-      },
-      complete: () => {
-        this.loading = false;
       }
     })
   }
@@ -69,11 +71,11 @@ export class EmployeelistComponent {
   }
 
   updateEmployee(id: string) {
-    this.router.navigate(['/employee/update', id])
+    this.router.navigate(['/employees/update', id])
   }
 
   addEmployee() {
-    this.router.navigate(['/employee/add'])
+    this.router.navigate(['/employees/add'])
   }
 
   deleteEmployee(id: string): void {

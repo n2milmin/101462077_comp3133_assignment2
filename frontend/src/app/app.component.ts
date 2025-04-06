@@ -16,6 +16,9 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.isLoggedIn = !!localStorage.getItem('token');
+
+    if (this.isLoggedIn) 
+      this.router.navigate(['/employees']);
   }
 
   onSubmit(): void {
