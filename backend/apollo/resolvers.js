@@ -26,7 +26,26 @@ const dateScalar = new GraphQLScalarType({
 module.exports = {
   Date: dateScalar,
   Query: {
-    // Login query
+    // Get all employees
+    getAllEmp: async () => await Employee.find(),
+
+    // Get employee by ID
+    searchEmpById: async (_, { id }) => await Employee.findById({ "_id": id }),
+
+    // Search employee by designation or department
+    searchEmpByD: async (_, { designation, department }) => {
+      if (designation) {
+        return await Employee.find({ designation: designation });
+      }
+      if (department) {
+        return await Employee.find({ department: department });
+      }
+      throw new Error("Please provide either a designation or department");
+    }
+  },
+
+  Mutation: {
+    // Login mutation
     login: async (_, { username, password }) => {
       // Find the user 
       const user = await User.findOne({ username: username });
@@ -51,26 +70,6 @@ module.exports = {
     
       return {token};
     },
-
-    // Get all employees
-    getAllEmp: async () => await Employee.find(),
-
-    // Get employee by ID
-    searchEmpById: async (_, { id }) => await Employee.findById({ "_id": id }),
-
-    // Search employee by designation or department
-    searchEmpByD: async (_, { designation, department }) => {
-      if (designation) {
-        return await Employee.find({ designation: designation });
-      }
-      if (department) {
-        return await Employee.find({ department: department });
-      }
-      throw new Error("Please provide either a designation or department");
-    }
-  },
-
-  Mutation: {
     // Signup mutation
     signup: async (_, { username, email, password }) => {
       console.log("Start signup")

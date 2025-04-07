@@ -34,7 +34,6 @@ exports.typeDefs = gql`
 
     # Query type for fetching data
     type Query {
-        login(username: String!, password: String!): AuthPayload!
         getAllEmp: [Employee]
         searchEmpById(id: ID!): Employee
         searchEmpByD(designation: String, department: String): [Employee]
@@ -42,6 +41,7 @@ exports.typeDefs = gql`
 
     # Mutation type for creating and updating data
     type Mutation {
+        login(username: String!, password: String!): AuthPayload!
         signup(
             username: String!,
             email: String!,
