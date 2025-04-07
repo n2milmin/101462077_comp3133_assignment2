@@ -1,6 +1,5 @@
 const Employee = require('../models/employee');
 const User = require('../models/user');
-const { compare } = require('bcrypt');
 const { GraphQLScalarType, Kind } = require('graphql');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -49,14 +48,14 @@ module.exports = {
     login: async (_, { username, password }) => {
       // Find the user 
       const user = await User.findOne({ username: username });
-    
+
       if (!user) {
         throw new Error("Invalid username/password"); 
       }
     
       // Compare the given password 
       const isValidPassword = await bcrypt.compare(password, user.password);
-    
+
       if (!isValidPassword) {
         throw new Error("Invalid username/password");
       }
