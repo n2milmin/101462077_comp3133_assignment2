@@ -33,7 +33,9 @@ async function startServer() {
   app.use(express.json());
   app.use(cors({
     origin: 'https://101462077-comp3133-assignment2-frontend.vercel.app', 
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS'], 
+    allowedHeaders: ['Content-Type', 'Authorization'] 
   }));
 
   const server = new ApolloServer({
