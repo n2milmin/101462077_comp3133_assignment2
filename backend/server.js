@@ -32,7 +32,7 @@ async function startServer() {
   const app = express();
   app.use(express.json());
   app.use(cors({
-    origin: 'https://101462077-comp3133-assignment2-frontend.vercel.app/', 
+    origin: 'https://101462077-comp3133-assignment2-frontend.vercel.app', 
     credentials: true
   }));
 
