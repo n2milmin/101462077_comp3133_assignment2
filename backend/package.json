@@ -23,7 +23,7 @@
   ],
   "author": "Nicole Milmine",
   "license": "ISC",
-  "homepage": "git+https://github.com/n2milmin/COMP3133_FullStack_II.git",
+  "homepage": "https://one01462077-comp3133-assignment2-frontend.onrender.com",
   "dependencies": {
     "apollo-server": "^3.13.0",
     "apollo-server-express": "^3.13.0",
